@@ -6,6 +6,71 @@
 
 ## 前言
 
+1. 学习技术
+
+2. 用技术换影响力
+
+3. 学习这个库: 功能；它是如何实现的
+
+4. 先看官方文档一手资料，不要看二手的
+
+5. 看到不懂的要兴奋起来
+
+6. 善用搜索
+
+7. 如何知道这个方法到底是干嘛的？实现一遍
+
+   
+
+### 直播
+
+#### debug
+
+![image-20220710203318683](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20220710203318683.png)
+
+![image-20220710203616015](G:\学习\coderReaderList\codeReader\image-20220710203616015.png)
+
+debug过一遍happypath,
+
+option处理数据，存给name
+
+#### 还可以从功能上分解需求点
+
+- 全局的  command 是如何实现的
+- sub command 是如何实现的
+- 每个 command 的 option 是如何实现的
+- help 和 version 是如何实现的
+
+#### 程序等于数据结构＋算法
+
+程序三件事：收集数据、处理、输出
+
+- 哪一部分是收集数据的、
+  - new Cac()传入数据（command,option,action）
+  - 收集数据：option、command、action
+  - 
+- 哪一部分是算法
+  - 处理：cac.ts/parse(line169)
+  - process.argv(node的api) 遍历对比 （先学会使用再学如何实现不然看不懂。
+- 输出
+
+test单测——使用者角度来定义数据结构，反推——用想要实现的东西来约束用户的传入
+
+#### 缺点
+
+- 测试覆盖率低 比如help输出、option尖括号和中括号的实现代表是什么
+- cac类包含了太多的职责，单一职责parse、command、option
+- 可读性差。
+  - 低层次的代码，从头堆到尾(怎么干的)。
+  - 应该通过函数封装(干什么的)（vue3比较优雅）
+- 痛点：作者不维护了，技术栈老 (翻新一下？写一遍才能get精髓)
+
+#### 测试
+
+无脑上vitest就好了
+
+
+
 ### 定义
 
 > **C**ommand **A**nd **C**onquer is a JavaScript library for building CLI apps.
@@ -18,14 +83,17 @@
 
 ### 阅读源码的流程
 
-> 1. 下载好了代码先安装依赖
+
+
+> 1. 读文档（带着问题去思考）
+> 2. 下载好了代码先安装依赖
 >    - 这个项目用 yarn
-> 2. 运行一下测试 检测是否可以跑起来
-> 3. 基于一个测试跑一下  先大概了解一下流程
+> 3. 运行一下测试 检测是否可以跑起来
+> 4. 基于一个测试跑一下  先大概了解一下流程
 >    - 基于断点看执行的流程
 >    - 用的是jest测试框架，使用`npm run test`运行测试用例
 >    - 学会打断点看执行过程
-> 4. 自己给他写一个测试 这个测试包含你想要了解的功能
+> 5. 自己给他写一个测试 这个测试包含你想要了解的功能
 >    - 比如 <>  或者 []  看看它是如何解析的
 
 ### windows生成目录结构树
@@ -493,7 +561,9 @@ cac
 > - Apache ：类似于 MIT ，同时还包含了贡献者向用户提供专利授权相关的条款。
 > - GPL ：修改项目代码的用户再次分发源码或二进制代码时，必须公布他的相关修改。
 
-### circle.yml
+### circle.yml(落后了)
+
+
 
 CircleCI持续集成持续部署的配置文件由三部分组成
 
@@ -502,7 +572,7 @@ CircleCI持续集成持续部署的配置文件由三部分组成
 - 工作（jobs)
   - 你要执行的job清单，集合中：键为job名称，值位job内容。
   - 如使用workflow,job名称要唯一
-  - 如不适用worflow,必须包含名称为build的job来作为提交代码时的默认job
+  - 如不适用worflow,必须包含名称build的job来作为提交代码时的默认job
 - 工作流（workflows)
 
 ```yaml
@@ -582,6 +652,8 @@ function createConfig({ dts, esm } = {}) {
       file,
       exports: 'named',
     },
+    //写的太拧巴！
+      //如何知道这个方法到底是干嘛的？实现一遍
     plugins: [
       nodeResolvePlugin({
         mainFields: dts ? ['types', 'typings'] : ['module', 'main'],
@@ -669,6 +741,9 @@ module.exports = {
   - logo或者预览图，徽章badge
 - 目录
   - 锚点跳转 （目录树可以用tree生成也可以用project-tree插件)
+  - 功能（让用户最小成本使用你的库
+  - api文档
+  - 一定要动手，文档不一定是最新的（文档代码不同步，以真正程序输出作为了解的点
 - 背景
   - 解决了什么问题
   - 使用场景
